@@ -1,5 +1,5 @@
-
-'use client';
+﻿'use client';
+import { API_URL } from '@/lib/api';
 
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -27,7 +27,7 @@ function getVerificationRequest(token: string): Promise<VerificationResult> {
   const request = (async (): Promise<VerificationResult> => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/auth/verify-email?token=${encodeURIComponent(token)}`,
+        `${API_URL}/auth/verify-email?token=${encodeURIComponent(token)}`,
         {
           method: 'GET',
           cache: 'no-store',
@@ -46,7 +46,7 @@ function getVerificationRequest(token: string): Promise<VerificationResult> {
           success: false,
           message:
             message ??
-            'Este link é inválido, expirou ou já foi utilizado.',
+            'Este link Ã© invÃ¡lido, expirou ou jÃ¡ foi utilizado.',
         };
       }
 
@@ -54,13 +54,13 @@ function getVerificationRequest(token: string): Promise<VerificationResult> {
         success: true,
         message:
           message ??
-          'O teu endereço de e-mail foi confirmado com sucesso!',
+          'O teu endereÃ§o de e-mail foi confirmado com sucesso!',
       };
     } catch {
       return {
         success: false,
         message:
-          'Não foi possível contactar o servidor. Tenta novamente mais tarde.',
+          'NÃ£o foi possÃ­vel contactar o servidor. Tenta novamente mais tarde.',
       };
     }
   })();
@@ -76,7 +76,7 @@ function VerifyEmailContent() {
 
   const [status, setStatus] = useState<VerificationStatus>('loading');
   const [message, setMessage] = useState(
-    'A confirmar o teu endereço de e-mail...',
+    'A confirmar o teu endereÃ§o de e-mail...',
   );
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function VerifyEmailContent() {
     async function verifyEmail() {
       if (!token) {
         setStatus('error');
-        setMessage('O link de confirmação não contém um token válido.');
+        setMessage('O link de confirmaÃ§Ã£o nÃ£o contÃ©m um token vÃ¡lido.');
         return;
       }
 
@@ -172,10 +172,10 @@ function VerifyEmailContent() {
           className="mb-3 text-[clamp(24px,5vw,30px)] font-bold leading-tight tracking-[-0.7px]"
         >
           {status === 'loading'
-            ? 'Só um momento'
+            ? 'SÃ³ um momento'
             : isSuccess
               ? 'E-mail confirmado!'
-              : 'Não foi possível confirmar'}
+              : 'NÃ£o foi possÃ­vel confirmar'}
         </h1>
 
         <p
@@ -191,13 +191,13 @@ function VerifyEmailContent() {
             href="/"
             className="block w-full rounded-[10px] bg-[#635bff] px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#5148ed] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9189ff] motion-reduce:transition-none"
           >
-            Voltar ao início
+            Voltar ao inÃ­cio
           </Link>
         )}
 
         {status === 'loading' && (
           <p className="mt-5 text-[13px] leading-relaxed text-[#77788b]">
-            Estamos a validar o teu link em segurança.
+            Estamos a validar o teu link em seguranÃ§a.
           </p>
         )}
       </section>
@@ -218,3 +218,5 @@ export default function VerifyEmailPage() {
     </Suspense>
   );
 }
+
+

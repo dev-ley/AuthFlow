@@ -32,3 +32,4 @@ Thumbs.db
 *.sqlite
 *.db
 '@ | Set-Content -Encoding utf8 .gitignore
+.neon
