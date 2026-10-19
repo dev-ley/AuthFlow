@@ -1,6 +1,6 @@
 ﻿'use client';
-import { API_URL } from '@/lib/api';
 
+import { API_URL } from '@/lib/api';
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 
@@ -61,20 +61,17 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `${API_URL}/auth/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: name.trim(),
-            email: email.trim().toLowerCase(),
-            password,
-          }),
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          password,
+        }),
+      });
 
       const data: RegisterResponse = await response.json();
 
@@ -294,7 +291,7 @@ export default function RegisterPage() {
                     }`}
                   >
                     <span className="shrink-0" aria-hidden="true">
-                      {rule.valid ? 'âœ“' : 'â—‹'}
+                      {rule.valid ? '✓' : '○'}
                     </span>
                     <span>{rule.label}</span>
                   </li>
@@ -412,5 +409,3 @@ export default function RegisterPage() {
     </main>
   );
 }
-
-
