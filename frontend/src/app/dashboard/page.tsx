@@ -1,6 +1,6 @@
 ﻿'use client';
-import { API_URL } from '@/lib/api';
 
+import { API_URL } from '@/lib/api';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -10,8 +10,6 @@ interface User {
   name: string;
   email: string;
 }
-
-
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -83,7 +81,10 @@ export default function DashboardPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#0d0e13] px-5 text-[#f4f4f8]">
         <div className="text-center">
-          <div className="mx-auto mb-5 h-9 w-9 animate-spin rounded-full border-[3px] border-[#303044] border-t-[#635bff]" />
+          <div
+            aria-hidden="true"
+            className="mx-auto mb-5 h-9 w-9 animate-spin rounded-full border-[3px] border-[#303044] border-t-[#635bff]"
+          />
           <p className="text-sm text-[#a1a1b2]">
             A verificar a tua sessão...
           </p>
@@ -158,14 +159,19 @@ export default function DashboardPage() {
 
       <section className="mx-auto w-full max-w-[650px] flex-1 px-5 py-14 sm:py-[76px]">
         <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#303044] bg-[#171622] px-3 py-2 text-xs text-[#bdb8ff]">
-          <span className="h-[7px] w-[7px] rounded-full bg-[#67d9a0] shadow-[0_0_9px_#67d9a055]" />
+          <span
+            aria-hidden="true"
+            className="h-[7px] w-[7px] rounded-full bg-[#67d9a0] shadow-[0_0_9px_#67d9a055]"
+          />
           Sessão autenticada
         </div>
 
         <h1 className="text-[clamp(38px,7vw,58px)] font-bold leading-[1.12] tracking-[-2px]">
           Bem-vindo,
           <br />
-          <span className="break-words text-[#8b84ff]">{firstName}!</span>
+          <span className="break-words text-[#8b84ff]">
+            {firstName}!
+          </span>
         </h1>
 
         <p className="mb-9 mt-5 max-w-[470px] text-[15px] leading-8 text-[#a1a1b2]">
@@ -217,8 +223,11 @@ export default function DashboardPage() {
             </span>
 
             <span className="inline-flex items-center gap-2 text-xs text-[#76dca9]">
-              <span className="grid h-[18px] w-[18px] place-items-center rounded-full bg-[#193b2d] text-[11px]">
-                âœ“
+              <span
+                aria-hidden="true"
+                className="grid h-[18px] w-[18px] place-items-center rounded-full bg-[#193b2d] text-[11px]"
+              >
+                ✓
               </span>
               E-mail confirmado
             </span>
@@ -226,7 +235,27 @@ export default function DashboardPage() {
         </div>
 
         <p className="mt-6 flex items-center justify-center gap-2 text-center text-xs text-[#85869a]">
-          <span className="text-lg text-[#8b84ff]">â™¢</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="h-4 w-4 shrink-0 text-[#8b84ff]"
+          >
+            <path
+              d="M12 3 19 6V11C19 15.5 16 19 12 21C8 19 5 15.5 5 11V6L12 3Z"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="m9 12 2 2 4-4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
           A tua área privada está protegida por autenticação.
         </p>
       </section>
@@ -238,5 +267,3 @@ export default function DashboardPage() {
     </main>
   );
 }
-
-
