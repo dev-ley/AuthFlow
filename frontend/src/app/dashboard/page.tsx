@@ -37,14 +37,14 @@ export default function DashboardPage() {
       }
 
       if (!response.ok) {
-        throw new Error('NÃ£o foi possÃ­vel carregar o teu perfil.');
+        throw new Error('Não foi possível carregar o teu perfil.');
       }
 
       const profile: User = await response.json();
       setUser(profile);
     } catch {
       setError(
-        'NÃ£o foi possÃ­vel ligar ao servidor. Confirma se o backend estÃ¡ a funcionar.',
+        'Não foi possível ligar ao servidor. Confirma se o backend está a funcionar.',
       );
     } finally {
       setLoading(false);
@@ -66,14 +66,14 @@ export default function DashboardPage() {
       });
 
       if (!response.ok) {
-        throw new Error('NÃ£o foi possÃ­vel terminar a sessÃ£o.');
+        throw new Error('Não foi possível terminar a sessão.');
       }
 
       setUser(null);
       router.replace('/');
     } catch {
       setError(
-        'NÃ£o foi possÃ­vel terminar a sessÃ£o. Verifica se o backend estÃ¡ a funcionar.',
+        'Não foi possível terminar a sessão. Verifica se o backend está a funcionar.',
       );
       setLoggingOut(false);
     }
@@ -85,7 +85,7 @@ export default function DashboardPage() {
         <div className="text-center">
           <div className="mx-auto mb-5 h-9 w-9 animate-spin rounded-full border-[3px] border-[#303044] border-t-[#635bff]" />
           <p className="text-sm text-[#a1a1b2]">
-            A verificar a tua sessÃ£o...
+            A verificar a tua sessão...
           </p>
         </div>
       </main>
@@ -152,14 +152,14 @@ export default function DashboardPage() {
           disabled={loggingOut}
           className="rounded-xl border border-[#363744] px-3 py-2.5 text-xs font-medium text-[#c9c9d5] transition hover:border-[#635bff] hover:bg-[#171722] hover:text-white disabled:cursor-wait disabled:opacity-60 sm:px-4 sm:text-sm"
         >
-          {loggingOut ? 'A terminar...' : 'Terminar sessÃ£o'}
+          {loggingOut ? 'A terminar...' : 'Terminar sessão'}
         </button>
       </header>
 
       <section className="mx-auto w-full max-w-[650px] flex-1 px-5 py-14 sm:py-[76px]">
         <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[#303044] bg-[#171622] px-3 py-2 text-xs text-[#bdb8ff]">
           <span className="h-[7px] w-[7px] rounded-full bg-[#67d9a0] shadow-[0_0_9px_#67d9a055]" />
-          SessÃ£o autenticada
+          Sessão autenticada
         </div>
 
         <h1 className="text-[clamp(38px,7vw,58px)] font-bold leading-[1.12] tracking-[-2px]">
@@ -169,7 +169,7 @@ export default function DashboardPage() {
         </h1>
 
         <p className="mb-9 mt-5 max-w-[470px] text-[15px] leading-8 text-[#a1a1b2]">
-          A tua conta estÃ¡ pronta. Iniciaste sessÃ£o com sucesso no AuthFlow.
+          A tua conta está pronta. Iniciaste sessão com sucesso no AuthFlow.
         </p>
 
         {error && (
@@ -190,7 +190,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-base font-semibold">O teu perfil</h2>
               <p className="mt-1 text-xs text-[#8f90a2]">
-                InformaÃ§Ãµes da tua conta
+                Informações da tua conta
               </p>
             </div>
           </div>
@@ -227,13 +227,13 @@ export default function DashboardPage() {
 
         <p className="mt-6 flex items-center justify-center gap-2 text-center text-xs text-[#85869a]">
           <span className="text-lg text-[#8b84ff]">â™¢</span>
-          A tua Ã¡rea privada estÃ¡ protegida por autenticaÃ§Ã£o.
+          A tua área privada está protegida por autenticação.
         </p>
       </section>
 
       <footer className="flex flex-col gap-2 border-t border-[#252630] px-5 py-5 text-[11px] text-[#77788b] sm:flex-row sm:items-center sm:justify-between sm:px-[7%]">
         <span className="font-bold text-[#aaa9bd]">AuthFlow</span>
-        <span>AutenticaÃ§Ã£o segura, passo a passo.</span>
+        <span>Autenticação segura, passo a passo.</span>
       </footer>
     </main>
   );

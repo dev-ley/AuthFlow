@@ -46,7 +46,7 @@ function getVerificationRequest(token: string): Promise<VerificationResult> {
           success: false,
           message:
             message ??
-            'Este link Ã© invÃ¡lido, expirou ou jÃ¡ foi utilizado.',
+            'Este link é inválido, expirou ou já foi utilizado.',
         };
       }
 
@@ -54,13 +54,13 @@ function getVerificationRequest(token: string): Promise<VerificationResult> {
         success: true,
         message:
           message ??
-          'O teu endereÃ§o de e-mail foi confirmado com sucesso!',
+          'O teu endereço de e-mail foi confirmado com sucesso!',
       };
     } catch {
       return {
         success: false,
         message:
-          'NÃ£o foi possÃ­vel contactar o servidor. Tenta novamente mais tarde.',
+          'Não foi possível contactar o servidor. Tenta novamente mais tarde.',
       };
     }
   })();
@@ -76,7 +76,7 @@ function VerifyEmailContent() {
 
   const [status, setStatus] = useState<VerificationStatus>('loading');
   const [message, setMessage] = useState(
-    'A confirmar o teu endereÃ§o de e-mail...',
+    'A confirmar o teu endereço de e-mail...',
   );
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function VerifyEmailContent() {
     async function verifyEmail() {
       if (!token) {
         setStatus('error');
-        setMessage('O link de confirmaÃ§Ã£o nÃ£o contÃ©m um token vÃ¡lido.');
+        setMessage('O link de confirmação não contém um token válido.');
         return;
       }
 
@@ -172,10 +172,10 @@ function VerifyEmailContent() {
           className="mb-3 text-[clamp(24px,5vw,30px)] font-bold leading-tight tracking-[-0.7px]"
         >
           {status === 'loading'
-            ? 'SÃ³ um momento'
+            ? 'Só um momento'
             : isSuccess
               ? 'E-mail confirmado!'
-              : 'NÃ£o foi possÃ­vel confirmar'}
+              : 'Não foi possível confirmar'}
         </h1>
 
         <p
@@ -191,13 +191,13 @@ function VerifyEmailContent() {
             href="/"
             className="block w-full rounded-[10px] bg-[#635bff] px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#5148ed] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9189ff] motion-reduce:transition-none"
           >
-            Voltar ao inÃ­cio
+            Voltar ao início
           </Link>
         )}
 
         {status === 'loading' && (
           <p className="mt-5 text-[13px] leading-relaxed text-[#77788b]">
-            Estamos a validar o teu link em seguranÃ§a.
+            Estamos a validar o teu link em segurança.
           </p>
         )}
       </section>

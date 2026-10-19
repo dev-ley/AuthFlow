@@ -24,12 +24,12 @@ export default function RegisterPage() {
 
   const passwordRules = [
     { label: 'Pelo menos 12 caracteres', valid: password.length >= 12 },
-    { label: 'Uma letra maiÃºscula', valid: /[A-Z]/.test(password) },
-    { label: 'Uma letra minÃºscula', valid: /[a-z]/.test(password) },
-    { label: 'Um nÃºmero', valid: /[0-9]/.test(password) },
-    { label: 'Um sÃ­mbolo especial', valid: /[^A-Za-z0-9]/.test(password) },
+    { label: 'Uma letra maiúscula', valid: /[A-Z]/.test(password) },
+    { label: 'Uma letra minúscula', valid: /[a-z]/.test(password) },
+    { label: 'Um número', valid: /[0-9]/.test(password) },
+    { label: 'Um símbolo especial', valid: /[^A-Za-z0-9]/.test(password) },
     {
-      label: 'No mÃ¡ximo 72 bytes',
+      label: 'No máximo 72 bytes',
       valid: new TextEncoder().encode(password).length <= 72,
     },
   ];
@@ -45,7 +45,7 @@ export default function RegisterPage() {
     if (!passwordIsValid) {
       setFeedback({
         type: 'error',
-        message: 'A senha ainda nÃ£o cumpre todas as regras de seguranÃ§a.',
+        message: 'A senha ainda não cumpre todas as regras de segurança.',
       });
       return;
     }
@@ -53,7 +53,7 @@ export default function RegisterPage() {
     if (!passwordsMatch) {
       setFeedback({
         type: 'error',
-        message: 'As senhas nÃ£o coincidem.',
+        message: 'As senhas não coincidem.',
       });
       return;
     }
@@ -86,7 +86,7 @@ export default function RegisterPage() {
         throw new Error(
           data.messageDetail ??
             message ??
-            'NÃ£o foi possÃ­vel criar a conta.',
+            'Não foi possível criar a conta.',
         );
       }
 
@@ -108,7 +108,7 @@ export default function RegisterPage() {
         message:
           error instanceof Error
             ? error.message
-            : 'NÃ£o foi possÃ­vel contactar o servidor. Tenta novamente.',
+            : 'Não foi possível contactar o servidor. Tenta novamente.',
       });
     } finally {
       setLoading(false);
@@ -126,7 +126,7 @@ export default function RegisterPage() {
         <header className="mb-7">
           <Link
             href="/"
-            aria-label="AuthFlow - inÃ­cio"
+            aria-label="AuthFlow - início"
             className="mb-8 inline-flex items-center gap-2.5 text-[17px] font-bold tracking-tight text-[#f5f5fa]"
           >
             <span className="grid size-[34px] place-items-center rounded-[10px] bg-[#635bff] text-lg text-white">
@@ -140,11 +140,11 @@ export default function RegisterPage() {
           </p>
 
           <h1 className="text-[32px] font-bold leading-tight tracking-[-1.2px] sm:text-[35px]">
-            ComeÃ§a por aqui.
+            Começa por aqui.
           </h1>
 
           <p className="mt-3 text-sm leading-7 text-[#a5a5b5]">
-            Cria a tua conta para comeÃ§ares a utilizar o AuthFlow.
+            Cria a tua conta para começares a utilizar o AuthFlow.
           </p>
         </header>
 
@@ -180,8 +180,8 @@ export default function RegisterPage() {
             </p>
 
             <p className="mt-3 text-xs leading-6 text-[#858597]">
-              Abre a mensagem que te enviÃ¡mos e clica no link de confirmaÃ§Ã£o.
-              Se nÃ£o a encontrares, verifica tambÃ©m a pasta de spam.
+              Abre a mensagem que te enviámos e clica no link de confirmação.
+              Se não a encontrares, verifica também a pasta de spam.
             </p>
 
             <button
@@ -189,16 +189,16 @@ export default function RegisterPage() {
               onClick={() => setFeedback(null)}
               className="mt-6 flex w-full items-center justify-center rounded-[10px] bg-[#635bff] px-5 py-[15px] text-sm font-bold text-white transition hover:bg-[#5148ed] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#aaa4ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#15161e]"
             >
-              Voltar ao formulÃ¡rio
+              Voltar ao formulário
             </button>
 
             <p className="mt-5 text-sm text-[#a5a5b5]">
-              JÃ¡ tens conta?{' '}
+              Já tens conta?{' '}
               <Link
                 href="/"
                 className="font-semibold text-[#aaa4ff] hover:text-[#d0ccff] hover:underline"
               >
-                Iniciar sessÃ£o
+                Iniciar sessão
               </Link>
             </p>
           </div>
@@ -355,7 +355,7 @@ export default function RegisterPage() {
                 >
                   {passwordsMatch
                     ? 'As senhas coincidem.'
-                    : 'As senhas ainda nÃ£o coincidem.'}
+                    : 'As senhas ainda não coincidem.'}
                 </p>
               )}
             </div>
@@ -388,17 +388,17 @@ export default function RegisterPage() {
             </button>
 
             <p className="text-center text-[11px] leading-6 text-[#77788b]">
-              Ao criares uma conta, receberÃ¡s um e-mail para confirmares o teu
-              endereÃ§o antes de iniciar sessÃ£o.
+              Ao criares uma conta, receberás um e-mail para confirmares o teu
+              endereço antes de iniciar sessão.
             </p>
 
             <p className="text-center text-sm text-[#a5a5b5]">
-              JÃ¡ tens conta?{' '}
+              Já tens conta?{' '}
               <Link
                 href="/"
                 className="font-semibold text-[#aaa4ff] hover:text-[#d0ccff] hover:underline"
               >
-                Iniciar sessÃ£o
+                Iniciar sessão
               </Link>
             </p>
           </form>
@@ -406,7 +406,7 @@ export default function RegisterPage() {
 
         <footer className="mt-8 flex flex-col gap-2 border-t border-[#292a36] pt-5 text-center text-[11px] leading-relaxed text-[#77788b]">
           <span className="font-bold text-[#aaa4ff]">AuthFlow</span>
-          <span>AutenticaÃ§Ã£o simples. SeguranÃ§a em primeiro lugar.</span>
+          <span>Autenticação simples. Segurança em primeiro lugar.</span>
         </footer>
       </section>
     </main>

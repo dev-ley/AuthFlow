@@ -36,7 +36,7 @@ export default function LoginPage() {
     }
 
     if (new TextEncoder().encode(password).length > 72) {
-      setFeedback('A senha introduzida Ã© demasiado longa.');
+      setFeedback('A senha introduzida é demasiado longa.');
       return;
     }
 
@@ -68,7 +68,7 @@ export default function LoginPage() {
         throw new Error(
           data.messageDetail ??
             message ??
-            'NÃ£o foi possÃ­vel iniciar sessÃ£o.',
+            'Não foi possível iniciar sessão.',
         );
       }
 
@@ -77,7 +77,7 @@ export default function LoginPage() {
       setFeedback(
         error instanceof Error
           ? error.message
-          : 'NÃ£o foi possÃ­vel contactar o servidor. Tenta novamente.',
+          : 'Não foi possível contactar o servidor. Tenta novamente.',
       );
     } finally {
       setLoading(false);
@@ -95,7 +95,7 @@ export default function LoginPage() {
         <header className="mb-8">
           <Link
             href="/"
-            aria-label="AuthFlow - inÃ­cio"
+            aria-label="AuthFlow - início"
             className="mb-8 inline-flex items-center gap-2.5 text-[17px] font-bold tracking-tight text-[#f5f5fa]"
           >
             <span className="grid size-[34px] place-items-center rounded-[10px] bg-[#635bff] text-lg text-white">
@@ -113,7 +113,7 @@ export default function LoginPage() {
           </h1>
 
           <p className="mt-3 text-sm leading-7 text-[#a5a5b5]">
-            Inicia sessÃ£o para continuares no AuthFlow.
+            Inicia sessão para continuares no AuthFlow.
           </p>
         </header>
 
@@ -193,16 +193,16 @@ export default function LoginPage() {
                   aria-hidden="true"
                   className="size-[15px] animate-spin rounded-full border-2 border-white/35 border-t-white motion-reduce:animate-none"
                 />
-                A iniciar sessÃ£o...
+                A iniciar sessão...
               </>
             ) : (
-              'Iniciar sessÃ£o'
+              'Iniciar sessão'
             )}
           </button>
         </form>
 
         <p className="mt-6 text-center text-[13px] text-[#a5a5b5]">
-          Ainda nÃ£o tens conta?{' '}
+          Ainda não tens conta?{' '}
           <Link
             href="/register"
             className="font-semibold text-[#aaa4ff] transition hover:text-[#d0ccff] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8178ff]"
@@ -213,7 +213,7 @@ export default function LoginPage() {
 
         <footer className="mt-8 flex flex-col gap-2 border-t border-[#292a36] pt-5 text-center text-[11px] leading-relaxed text-[#77788b]">
           <span className="font-bold text-[#aaa4ff]">AuthFlow</span>
-          <span>AutenticaÃ§Ã£o simples. SeguranÃ§a em primeiro lugar.</span>
+          <span>Autenticação simples. Segurança em primeiro lugar.</span>
         </footer>
       </section>
     </main>
