@@ -1,4 +1,3 @@
-
 import {
   Injectable,
   InternalServerErrorException,
@@ -18,7 +17,9 @@ export class EmailService {
     const apiKey = this.configService.get<string>('BREVO_API_KEY');
 
     if (!apiKey) {
-      throw new Error('A variável BREVO_API_KEY não foi definida no .env.');
+      throw new Error(
+        'A variável BREVO_API_KEY não foi definida no .env.',
+      );
     }
 
     const emailFrom =
@@ -38,9 +39,44 @@ export class EmailService {
     name: string,
     token: string,
   ): Promise<void> {
-    const frontendUrl =
+    const configuredFrontendUrl =
       this.configService.get<string>('FRONTEND_URL') ??
-      'http://localhost:3001';
+      (process.env.NODE_ENV === 'production'
+        ? ''
+        : 'http://localhost:3001');
+
+    if (!configuredFrontendUrl) {
+      this.logger.error(
+        'FRONTEND_URL não está configurada no ambiente de produção.',
+      );
+
+      throw new InternalServerErrorException(
+        'Não foi possível preparar o link de confirmação.',
+      );
+    }
+
+    let frontendUrl: string;
+
+    try {
+      const parsedUrl = new URL(configuredFrontendUrl);
+
+      if (
+        process.env.NODE_ENV === 'production' &&
+        parsedUrl.protocol !== 'https:'
+      ) {
+        throw new Error('A URL de produção deve utilizar HTTPS.');
+      }
+
+      frontendUrl = parsedUrl.toString().replace(/\/+$/, '');
+    } catch (error: unknown) {
+      this.logger.error(
+        'A variável FRONTEND_URL contém um endereço inválido.',
+      );
+
+      throw new InternalServerErrorException(
+        'A configuração do endereço de confirmação é inválida.',
+      );
+    }
 
     const verificationUrl =
       `${frontendUrl}/verify-email?token=${encodeURIComponent(token)}`;
