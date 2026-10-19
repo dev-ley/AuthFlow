@@ -2,29 +2,35 @@
 
 **Secure authentication, email verification, and session management in a full-stack application.**
 
-AuthFlow is a web application built to demonstrate an authentication system using modern technologies, a clear separation between frontend and backend, and security best practices.
+AuthFlow is a web application built to demonstrate an authentication system using modern technologies, a separated frontend and backend architecture, and security best practices.
 
-Users can create an account, verify their email address, sign in, and access a private dashboard protected by HTTP-only cookie-based authentication.
+The project allows users to create an account, verify their email address, sign in, and access a protected private area using JWT-based authentication and HTTP-only cookies.
+
+🌐 **Live application:** [Access AuthFlow](https://auth-flow-mu-ten.vercel.app)
+
+![AuthFlow application screenshot](frontend/public/AuthFlow.jpeg)
 
 ## ✨ Features
 
 - 📝 User registration.
-- 📧 Email verification through a verification link.
+- 📧 Email verification through a confirmation link.
 - 🔑 Login with credential validation.
-- 🍪 JWT authentication stored in an HTTP-only cookie.
-- 🛡️ Protected private routes.
-- 👤 Authenticated user profile retrieval.
+- 🍪 JWT authentication using HTTP-only cookies.
+- 🛡️ Protected routes.
+- 👤 Retrieval of authenticated user information.
 - 🚪 Logout and session termination.
-- ✅ Backend request validation.
-- 🗄️ PostgreSQL database integration.
-- 🔄 Database schema and migrations managed with Prisma ORM.
+- ✅ Backend input validation.
+- 🗄️ PostgreSQL data persistence.
+- 🔄 Database models and migrations managed with Prisma ORM.
+- 🔀 Next.js API proxy for forwarding requests to the backend.
+- 📱 Responsive interface for desktop and mobile devices.
 
 ## 🖥️ Tech Stack
 
 ### Frontend
 
-- Next.js
-- React
+- Next.js 16
+- React 19
 - TypeScript
 - Tailwind CSS 4
 
@@ -38,40 +44,49 @@ Users can create an account, verify their email address, sign in, and access a p
 - bcrypt
 - class-validator
 - class-transformer
+- cookie-parser
 
 ### Database and Services
 
 - PostgreSQL
 - Prisma ORM
-- Brevo — email delivery
+- Neon — managed PostgreSQL database
+- Brevo — transactional email delivery
 
-### Tools
+### Tools and Deployment
 
 - Git and GitHub
 - Docker
 - npm
+- Vercel — frontend deployment
+- Render — backend deployment
 
 ## 🏗️ Project Architecture
 
-AuthFlow is organized into two main applications: frontend and backend. PostgreSQL provides persistent data storage, while Prisma ORM manages database access.
+AuthFlow is organized into two main applications: a frontend and a backend. Data persistence is handled by PostgreSQL, with database access managed through Prisma ORM.
 
 ```text
 AuthFlow/
 ├── frontend/
 │   ├── public/
 │   ├── src/
-│   │   └── app/
-│   │       ├── dashboard/
-│   │       │   └── page.tsx
-│   │       ├── login/
-│   │       │   └── page.tsx
-│   │       ├── register/
-│   │       │   └── page.tsx
-│   │       ├── verify-email/
-│   │       │   └── page.tsx
-│   │       ├── globals.css
-│   │       ├── layout.tsx
-│   │       └── page.tsx
+│   │   ├── app/
+│   │   │   ├── api/
+│   │   │   │   └── [...path]/
+│   │   │   │       └── route.ts
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx
+│   │   │   ├── login/
+│   │   │   │   └── page.tsx
+│   │   │   ├── register/
+│   │   │   │   └── page.tsx
+│   │   │   ├── verify-email/
+│   │   │   │   └── page.tsx
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   └── lib/
+│   │       └── api.ts
 │   ├── package.json
 │   └── ...
 │
@@ -95,34 +110,38 @@ AuthFlow/
 
 ### Application Structure
 
-- **Frontend:** built with Next.js, React, TypeScript, and Tailwind CSS 4. It contains the login, registration, email verification, and private dashboard pages.
-- **Backend:** a REST API built with NestJS and TypeScript. It handles authentication, request validation, email delivery, and business logic.
-- **Prisma:** manages PostgreSQL access, database models, and migrations.
-- **PostgreSQL:** stores user data and other information required by the application.
+- **Frontend:** Built with Next.js, React, TypeScript, and Tailwind CSS 4. It contains the login, registration, email verification, and private dashboard pages.
+- **Next.js API Proxy:** The `src/app/api/[...path]/route.ts` route receives frontend requests and forwards them to the backend API.
+- **Backend:** A REST API built with NestJS and TypeScript. It handles authentication, input validation, email delivery, and business logic.
+- **Prisma ORM:** Manages PostgreSQL access, database models, and migrations.
+- **PostgreSQL:** Stores user data and the information required by the application.
 
-The frontend communicates with the backend through HTTP requests. The backend handles authentication and database access. This separation improves maintainability and allows each component to be deployed independently.
+The proxy allows the browser to communicate with the frontend's own domain while Next.js forwards requests to the backend. This architecture helps avoid authentication issues related to cookies shared across different domains.
 
 ## 🔐 Security
 
 The project implements several mechanisms to help protect user data and sessions:
 
 - Passwords stored as bcrypt hashes.
-- JSON Web Token (JWT) authentication.
-- HTTP-only cookies to reduce token exposure to browser JavaScript.
-- Cookies configured for secure use in production.
-- Request validation on the backend.
-- CORS configuration to control allowed origins.
-- Protected routes requiring authentication.
-- Email verification for registered addresses.
-- Environment variables for application configuration and secrets.
+- JSON Web Token (JWT)-based authentication.
+- HTTP-only cookies to reduce direct token exposure to browser JavaScript.
+- Cookies configured for HTTPS in production.
+- Validation of incoming API data.
+- CORS configuration to control permitted origins.
+- Private routes requiring valid authentication.
+- Email verification to validate registered email addresses.
+- Environment variables for credentials, URLs, and secrets.
+- A Next.js proxy for forwarding authentication requests.
 
-Production deployment should use HTTPS, strong secrets, and a cookie policy compatible with the frontend and backend domains.
+The authentication token does not need to be stored in `localStorage`, reducing its direct exposure to JavaScript running in the browser.
 
-## ⚙️ Run Locally
+Production security also depends on correctly configuring cookies, HTTPS, CORS, secrets, and access permissions.
+
+## ⚙️ Running the Project Locally
 
 ### Prerequisites
 
-Make sure you have installed or configured:
+Before getting started, install or configure:
 
 - Node.js and npm.
 - PostgreSQL 16 or Docker.
@@ -131,7 +150,7 @@ Make sure you have installed or configured:
 
 ### 1. Clone the Repository
 
-After publishing the project on GitHub, run:
+Replace the example URL with the actual GitHub repository URL.
 
 ```bash
 git clone <REPOSITORY_URL>
@@ -147,7 +166,7 @@ cd backend
 npm install
 ```
 
-Create a `.env` file inside the `backend` directory using the following template:
+Create a `.env` file in the `backend` directory using the following example:
 
 ```env
 DATABASE_URL="postgresql://USERNAME:PASSWORD@localhost:5433/authflow?schema=public"
@@ -158,11 +177,16 @@ EMAIL_FROM="AuthFlow <verified-sender@yourdomain.com>"
 JWT_SECRET="A_STRONG_RANDOM_SECRET"
 ```
 
-Replace the example values with your local configuration. The `EMAIL_FROM` address must be an authorized sender in your email service.
+Replace the example values with your local configuration.
 
-**Important:** PostgreSQL must be running, and the database connection string must match your local setup.
+**Important:**
 
-Generate the Prisma client:
+- Port `5433` is only an example. Use the port where your PostgreSQL instance is actually available.
+- The `EMAIL_FROM` address must be an authorized sender in your email service.
+- Never commit your `.env` file or expose API keys and secrets.
+- Ensure the variables match the configuration expected by the backend.
+
+With the database running, generate the Prisma client:
 
 ```bash
 npx prisma generate
@@ -184,7 +208,7 @@ By default, the backend will be available at:
 
 `http://localhost:3000`
 
-The API uses `/api` as its global route prefix.
+The API route prefix is `/api`.
 
 ### 3. Configure the Frontend
 
@@ -195,54 +219,101 @@ cd frontend
 npm install
 ```
 
-Start the application:
+Create a `.env.local` file in the `frontend` directory:
+
+```env
+API_URL="http://localhost:3000/api"
+```
+
+This variable tells the Next.js proxy where to find the local backend.
+
+The frontend uses the `/api` route on its own domain. The `src/lib/api.ts` file should therefore contain:
+
+```typescript
+export const API_URL = '/api';
+```
+
+Start the frontend on port `3001`:
 
 ```bash
 npm run dev -- --port 3001
 ```
 
-The frontend will be available at:
+Open the application at:
 
 `http://localhost:3001`
 
-**Note:** Before running the frontend, ensure that its API requests point to the local backend. For production, configure the API URL through an environment variable.
+### 4. Validate the Production Build
+
+To check whether the frontend compiles successfully for production, run:
+
+```bash
+npm run build
+```
+
+Both the backend and frontend should be running to test the complete authentication flow locally.
 
 ## 🔌 API Endpoints
 
-The API provides the following authentication endpoints:
+The API provides the following authentication routes:
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `POST` | `/api/auth/register` | Register a user |
-| `GET` | `/api/auth/verify-email?token=...` | Verify an email address |
-| `POST` | `/api/auth/login` | Authenticate a user |
-| `POST` | `/api/auth/logout` | End the session |
-| `GET` | `/api/auth/me` | Retrieve the authenticated user |
+| `POST` | `/api/auth/register` | Registers a user |
+| `GET` | `/api/auth/verify-email?token=...` | Verifies an email address |
+| `POST` | `/api/auth/login` | Authenticates a user |
+| `POST` | `/api/auth/logout` | Ends the session |
+| `GET` | `/api/auth/me` | Retrieves the authenticated user |
 
-Endpoints that require an authenticated session must be called with the appropriate cookie credentials.
+Protected routes require a valid session. From the frontend, requests pass through the Next.js proxy, which forwards them to the backend.
 
 ## 🔄 Authentication Flow
 
 1. The user completes the registration form.
-2. The backend validates the submitted data and creates the account.
+2. The backend validates the data and creates the account.
 3. An email containing a verification link is sent.
 4. The user verifies their email address.
 5. The user signs in with their credentials.
-6. The backend validates the login and sets the authentication cookie.
-7. The frontend retrieves the user's information and grants access to the private dashboard.
-8. The user can end the session by logging out.
+6. The backend validates the credentials and sets the authentication cookie.
+7. The frontend forwards requests through the Next.js proxy.
+8. The dashboard retrieves the authenticated user's information.
+9. The user can end the session by logging out.
 
 ## 🌍 Deployment
 
-The project is structured to support independent deployment of its components:
+The project is deployed using separate services for the frontend, backend, database, and email delivery.
 
-- **Frontend:** a platform compatible with Next.js.
-- **Backend:** a platform compatible with Node.js and NestJS.
-- **Database:** a managed PostgreSQL service.
+| Component | Service |
+|---|---|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Neon |
+| Email delivery | Brevo |
 
-Before deployment, configure production environment variables, database connectivity, email delivery, CORS, and authentication cookies.
+### Live Application
 
-Production URLs must replace local development addresses. Cookie settings must be appropriate for the relationship between the frontend and backend domains.
+- **Frontend:** [https://auth-flow-mu-ten.vercel.app](https://auth-flow-mu-ten.vercel.app)
+- **Backend:** [https://authflow-api-9kda.onrender.com](https://authflow-api-9kda.onrender.com)
+
+### Production Configuration
+
+On Vercel, the `NEXT_PUBLIC_API_URL` environment variable should point to the backend, including the `/api` prefix:
+
+```env
+NEXT_PUBLIC_API_URL="https://authflow-api-9kda.onrender.com/api"
+```
+
+The proxy uses `API_URL` when configured and otherwise falls back to `NEXT_PUBLIC_API_URL`.
+
+On Render, the `FRONTEND_URL` variable must exactly match the frontend origin:
+
+```env
+FRONTEND_URL="https://auth-flow-mu-ten.vercel.app"
+```
+
+Configure the remaining environment variables according to your production services.
+
+Cookie settings must be compatible with HTTPS and the chosen authentication architecture. Changes to environment variables may require a new deployment.
 
 ## 📌 Project Goals
 
@@ -250,22 +321,23 @@ AuthFlow was developed to strengthen full-stack web development skills, includin
 
 - Building interfaces with Next.js and React.
 - Developing REST APIs with NestJS.
-- Implementing user authentication.
-- Integrating PostgreSQL and Prisma.
+- Implementing JWT authentication and HTTP-only cookies.
+- Protecting routes and managing sessions.
+- Integrating PostgreSQL and Prisma ORM.
 - Sending transactional emails.
-- Validating requests and protecting routes.
-- Structuring and maintaining separate applications.
-- Preparing applications for deployment.
+- Applying input validation and security best practices.
+- Connecting frontend and backend applications through a proxy.
+- Configuring environment variables and deploying applications to production.
 
 ## 👨‍💻 Author
 
 **Wesley Rodrigues**
 
-Full-Stack Web Developer
+Full Stack Web Developer
 
 - GitHub: [dev-ley](https://github.com/dev-ley)
 - LinkedIn: [wr-dev](https://www.linkedin.com/in/wr-dev/)
 
 ---
 
-Built as a learning and portfolio project, focusing on authentication, code organization, and full-stack development best practices.
+Developed as a learning and portfolio project, focusing on authentication, security, code organization, and full-stack development best practices.
